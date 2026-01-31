@@ -1,0 +1,53 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Secure JPG MD5 API",
+    "version": "1.0.0",
+    "description": "API para recibir una imagen JPG en base64, validar y devolver su hash MD5."
+  },
+  "paths": {
+    "/.netlify/functions/upload-jpg": {
+      "post": {
+        "summary": "Sube una imagen JPG y obtiene su hash MD5",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageBase64": {
+                    "type": "string",
+                    "description": "Imagen JPG codificada en base64"
+                  }
+                },
+                "required": ["imageBase64"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Hash MD5 calculado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "md5": {
+                      "type": "string",
+                      "description": "Hash MD5 de la imagen"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Solicitud inválida"
+          }
+        }
+      }
+    }
+  }
+}

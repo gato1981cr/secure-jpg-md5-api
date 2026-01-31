@@ -29,6 +29,20 @@ secure-jpg-md5-api/
 ├── README.md
 ```
 
+
+## Documentación interactiva (Swagger UI)
+
+Puedes consultar y probar la API desde la interfaz gráfica Swagger UI:
+
+- Local: [http://localhost:8888/docs-ui](http://localhost:8888/docs-ui)
+- Producción (Netlify): `https://<tu-sitio-netlify>.netlify.app/docs-ui`
+
+El JSON OpenAPI/Swagger está disponible en:
+- Local: [http://localhost:8888/.netlify/functions/docs](http://localhost:8888/.netlify/functions/docs)
+- Producción: `https://<tu-sitio-netlify>.netlify.app/.netlify/functions/docs`
+
+---
+
 ## Uso
 
 1. Clona el repositorio y entra en la carpeta:
@@ -49,9 +63,9 @@ secure-jpg-md5-api/
 ## Ejemplo de request
 
 ```json
-POST /api/upload-jpg
+POST /.netlify/functions/upload-jpg
 {
-  "base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
+  "imageBase64": "...base64..."
 }
 ```
 
@@ -115,9 +129,9 @@ secure-jpg-md5-api/
 ## Example request
 
 ```json
-POST /api/upload-jpg
+POST /.netlify/functions/upload-jpg
 {
-  "base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
+  "imageBase64": "...base64..."
 }
 ```
 
