@@ -43,7 +43,35 @@ El JSON OpenAPI/Swagger está disponible en:
 
 ---
 
-## Uso
+
+## Guía completa para producción en Netlify
+
+### 1. Estructura recomendada
+Coloca tus funciones en `netlify/functions/` y tus archivos estáticos (como Swagger UI) en `public/`.
+
+### 2. Documentación interactiva (Swagger UI)
+Swagger UI está disponible en `/docs-ui` y consume el JSON OpenAPI desde la función serverless `/docs`.
+
+### 3. Configuración de Netlify
+Asegúrate de tener en tu `netlify.toml`:
+
+```toml
+[build]
+  functions = "netlify/functions"
+  publish = "public"
+```
+
+Esto permite que Netlify sirva la carpeta `public` en producción y compile tus funciones correctamente.
+
+### 4. Deploy automático
+Conecta tu repo de GitHub a Netlify. Cada push a la rama configurada (por defecto `main`) activará un deploy automático.
+
+### 5. Problemas comunes y soluciones
+- **404 en /docs-ui:** Asegúrate de que la carpeta `public` esté configurada como publish en `netlify.toml`.
+- **500 en /.netlify/functions/docs:** Usa importación estática de `swagger.json` en la función, y asegúrate de que el archivo esté en `netlify/functions/`.
+- **No se encuentra el endpoint:** Verifica que la función esté en la carpeta correcta y que el nombre del archivo coincida con la ruta.
+
+### 6. Ejemplo de request
 
 1. Clona el repositorio y entra en la carpeta:
    ```sh
@@ -58,9 +86,9 @@ El JSON OpenAPI/Swagger está disponible en:
    ```sh
    netlify dev
    ```
-4. Haz deploy conectando el repo a Netlify.
 
-## Ejemplo de request
+4. Haz deploy conectando el repo a Netlify (o simplemente haz push si ya está conectado para deploy automático).
+
 
 ```json
 POST /.netlify/functions/upload-jpg
@@ -77,6 +105,8 @@ POST /.netlify/functions/upload-jpg
   "md5": "e2fc714c4727ee9395f324cd2e7f331f"
 }
 ```
+
+---
 
 ---
 
@@ -109,7 +139,35 @@ secure-jpg-md5-api/
 ├── README.md
 ```
 
-## Usage
+
+## Full guide for Netlify production
+
+### 1. Recommended structure
+Put your functions in `netlify/functions/` and your static files (like Swagger UI) in `public/`.
+
+### 2. Interactive documentation (Swagger UI)
+Swagger UI is available at `/docs-ui` and consumes the OpenAPI JSON from the serverless function `/docs`.
+
+### 3. Netlify configuration
+Make sure your `netlify.toml` includes:
+
+```toml
+[build]
+  functions = "netlify/functions"
+  publish = "public"
+```
+
+This allows Netlify to serve the `public` folder in production and build your functions correctly.
+
+### 4. Automatic deploy
+Connect your GitHub repo to Netlify. Every push to the configured branch (default `main`) will trigger an automatic deploy.
+
+### 5. Common issues and solutions
+- **404 on /docs-ui:** Make sure the `public` folder is set as publish in `netlify.toml`.
+- **500 on /.netlify/functions/docs:** Use static import of `swagger.json` in the function, and make sure the file is in `netlify/functions/`.
+- **Endpoint not found:** Check that the function is in the correct folder and the file name matches the route.
+
+### 6. Example request
 
 1. Clone the repo and enter the folder:
    ```sh
@@ -124,9 +182,9 @@ secure-jpg-md5-api/
    ```sh
    netlify dev
    ```
-4. Deploy by connecting the repo to Netlify.
 
-## Example request
+4. Deploy by connecting the repo to Netlify (or just push if already connected for auto deploy).
+
 
 ```json
 POST /.netlify/functions/upload-jpg
