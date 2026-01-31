@@ -1,0 +1,16 @@
+{
+  "name": "secure-jpg-md5-api",
+  "version": "1.0.0",
+  "description": "Netlify function to receive a JPG image as base64, validate and return its MD5 hash.",
+  "main": "netlify/functions/upload-jpg.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
